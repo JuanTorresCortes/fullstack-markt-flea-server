@@ -8,6 +8,7 @@ const {
 } = require("../controllers/usersControllers");
 
 const { checkIfEmpty } = require("../utils/checkIfEmpty");
+const { checkIfEmptyLogin } = require("../utils/checkIfEmptyLogin");
 const { validateUserData } = require("../utils/validateUserData");
 const { jwtValidate } = require("../utils/jwtValidate");
 
@@ -17,7 +18,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.post("/register", checkIfEmpty, validateUserData, createUser); // Register route with checkIfEmpty and validateData middle wares, and register controller function
-router.post("/login", checkIfEmpty, validateUserData, loginUser); // Login route with checkIfEmpty and validateData middle wares, and login controller function
+router.post("/login", checkIfEmptyLogin, validateUserData, loginUser); // Login route with checkIfEmpty and validateData middle wares, and login controller function
 router.get("/validate", jwtValidate, validateUser); // Validate route with jwtMiddleware middleware and validateUser controller function
 
 module.exports = router;
