@@ -2,7 +2,7 @@
 
 ## Description
 
-Market Flea is a web application backend that handles user authentication, item management, and transaction history. The backend is built using Node.js, Express, and MongoDB as the database.
+Market Flea backend is a web application backend that handles user authentication, item management, and transaction history. The backend is built using Node.js, Express, and MongoDB as the database.
 
 ## Tech Stack
 
