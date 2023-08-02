@@ -1,4 +1,5 @@
 const User = require("../model/User");
+const Product = require("../model/Product");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -90,8 +91,39 @@ const validateUser = async (req, res) => {
   }
 };
 
+// Controller function to delete a user and their products
+const deleteUserAndProducts = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Find the user by ID
+    const userToDelete = await User.findById(userId);
+
+    if (!userToDelete) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Delete all products associated with the user
+    await Product.deleteMany({ owner: userId });
+
+    // Delete the user
+    await User.findByIdAndDelete(userId);
+
+    res
+      .status(200)
+      .json({ success: true, message: "User and products deleted" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error", error: error });
+  }
+};
+
 module.exports = {
   createUser,
   loginUser,
+  deleteUserAndProducts,
   validateUser,
 };
