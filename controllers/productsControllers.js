@@ -28,7 +28,7 @@ const createProduct = async (req, res) => {
     // Prepare the Product data from the request body
     const productData = {
       owner: user, // Set the owner as the user ID
-      productName: req.body.name, // Extract the title from the request body
+      productName: req.body.productName, // Extract the title from the request body
       description: req.body.description, // Extract the description from the request body
       cost: req.body.cost,
       quantity: req.body.quantity,

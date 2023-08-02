@@ -11,8 +11,8 @@ const {
   deleteProduct,
 } = require("../controllers/productsControllers");
 
+router.post("/create-product", jwtValidate, createProduct);
 router.get("/all-products", jwtValidate, getAllProducts);
-router.post("/create-product", checkIfEmpty, jwtValidate, createProduct);
 router.put("/edit-product/:id", jwtValidate, updateProduct);
 router.delete("/delete-product/:id", jwtValidate, deleteProduct);
 
