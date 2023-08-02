@@ -19,6 +19,19 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+// Controller function to retrieve all posted products
+const getAllPostedProducts = async (req, res) => {
+  try {
+    // Retrieve all products with the 'isPosted' flag set to true
+    const postedProducts = await Product.find({ isPosted: true });
+
+    res.status(200).json({ success: true, products: postedProducts });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error", error: error });
+  }
+};
+
 // Function to create a new Product for a specific user
 const createProduct = async (req, res) => {
   try {
@@ -117,6 +130,7 @@ const deleteProduct = async (req, res) => {
 // Export the functions to be used in other parts of the application
 module.exports = {
   getAllProducts,
+  getAllPostedProducts,
   createProduct,
   updateProduct,
   deleteProduct,
