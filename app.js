@@ -10,9 +10,10 @@ require("dotenv").config(); // Loads environment variables from a .env file
 const { mongooseConnect } = require("./mongoose"); // Custom module for connecting to MongoDB using Mongoose
 mongooseConnect(); // Connect to the MongoDB database
 
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
+const indexRouter = require("./routes/index");
+const usersRouter = require("./routes/users");
 const productsRouter = require("./routes/products");
+const messagesRouter = require("./routes/messages");
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use("/products", productsRouter);
+app.use("/messages", messagesRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

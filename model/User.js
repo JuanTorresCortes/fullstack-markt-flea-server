@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { v4: uuid } = require("uuid");
+const messageSchema = require("../model/Message");
 
 const userSchema = new mongoose.Schema({
   _id: { type: String, default: uuid },
@@ -17,6 +18,7 @@ const userSchema = new mongoose.Schema({
   myItems: [{ type: String, ref: "items" }],
   passwordHash: { type: String, required: true },
   createdAt: { type: Date, default: Date.now },
+  messages: [messageSchema], // Using the imported messageSchema
 });
 
 const User = mongoose.model("user", userSchema);
