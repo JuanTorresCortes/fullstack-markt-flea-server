@@ -25,7 +25,7 @@ const productSchema = new mongoose.Schema({
     ],
     default: "miscellaneous",
   },
-  image: { type: Buffer }, // The image data will be stored as a Buffer
+  image: { type: Buffer, default: null }, // The image data will be stored as a Buffer
   isPosted: { type: Boolean, default: false },
 });
 

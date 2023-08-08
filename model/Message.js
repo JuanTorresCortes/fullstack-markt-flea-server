@@ -7,7 +7,7 @@ const messageSchema = new mongoose.Schema({
   sender: { type: String, ref: "User", required: true },
   senderName: { type: String, require: true },
   receiver: { type: String, ref: "User", required: true },
-  receiver: { type: String, required: true },
+  receiverName: { type: String, required: true },
   content: { type: String, required: true },
   timestamp: { type: Date, default: Date.now },
 });

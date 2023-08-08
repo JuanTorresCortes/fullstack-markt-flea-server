@@ -10,6 +10,13 @@ const getAllProducts = async (req, res) => {
     // Find all products in the Product model where the 'owner' field matches the user ID
     const allProducts = await Product.find({ owner: user });
 
+    // Convert image buffer to base64
+    allProducts.forEach((product) => {
+      if (product.image) {
+        product.image = product.image.toString("base64");
+      }
+    });
+
     // Respond with the found product's in a JSON format with a success flag
     res.status(200).json({ success: true, data: allProducts });
   } catch (error) {
@@ -46,7 +53,7 @@ const createProduct = async (req, res) => {
       cost: req.body.cost,
       quantity: req.body.quantity,
       categories: req.body.categories,
-      image: req.body.image,
+      image: req.file.buffer,
     };
 
     // Create a new product instance using the prepared data

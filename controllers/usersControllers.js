@@ -85,7 +85,14 @@ const validateUser = async (req, res) => {
       });
     }
 
-    res.status(200).json({ success: true, email: findUser.email });
+    res
+      .status(200)
+      .json({
+        success: true,
+        email: findUser.email,
+        firstName: findUser.firstName,
+        lastName: findUser.lastName,
+      });
   } catch (error) {
     res.status(500).json({ success: false, message: "error", error: error });
   }
