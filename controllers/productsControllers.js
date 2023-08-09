@@ -13,7 +13,7 @@ const getAllProducts = async (req, res) => {
     // Convert image buffer to base64
     allProducts.forEach((product) => {
       if (product.image) {
-        product.image = product.image.toString("base64");
+        product.image.toString("base64");
       }
     });
 
