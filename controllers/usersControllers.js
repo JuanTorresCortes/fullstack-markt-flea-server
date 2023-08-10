@@ -42,6 +42,7 @@ const loginUser = async (req, res) => {
       return res.status(401).json({
         success: false,
         message: "User or Password does not match",
+        error: { email: "User or Password does not match" }, // Send the error in an error object
       });
     }
 
@@ -50,9 +51,11 @@ const loginUser = async (req, res) => {
       foundUser.passwordHash
     );
     if (!isPasswordValid) {
-      return res
-        .status(401)
-        .json({ success: false, message: "User or password dose not match" });
+      return res.status(401).json({
+        success: false,
+        message: "User or Password does not match",
+        error: { password: "User or Password does not match" }, // Send the error in an error object
+      });
     }
 
     // Generate a JWT token for authentication
@@ -85,14 +88,12 @@ const validateUser = async (req, res) => {
       });
     }
 
-    res
-      .status(200)
-      .json({
-        success: true,
-        email: findUser.email,
-        firstName: findUser.firstName,
-        lastName: findUser.lastName,
-      });
+    res.status(200).json({
+      success: true,
+      email: findUser.email,
+      firstName: findUser.firstName,
+      lastName: findUser.lastName,
+    });
   } catch (error) {
     res.status(500).json({ success: false, message: "error", error: error });
   }
