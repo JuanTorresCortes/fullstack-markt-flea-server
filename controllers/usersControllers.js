@@ -91,8 +91,8 @@ const validateUser = async (req, res) => {
     res.status(200).json({
       success: true,
       email: findUser.email,
-      firstName: findUser.firstName,
-      lastName: findUser.lastName,
+      name: `${findUser.firstName} ${findUser.lastName}`,
+      _id: findUser._id,
     });
   } catch (error) {
     res.status(500).json({ success: false, message: "error", error: error });
