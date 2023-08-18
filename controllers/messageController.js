@@ -1,4 +1,6 @@
 const User = require("../model/User");
+const Message = require("../model/Message");
+const jwt = require("jsonwebtoken");
 
 const sendUserMessage = async (req, res) => {
   try {
@@ -117,8 +119,36 @@ const deleteAllUserMessages = async (req, res) => {
   }
 };
 
+// Controller function to get all messages of the logged-in user
+const getUserMessages = async (req, res) => {
+  try {
+    const token = req.headers.authorization.split(" ")[1];
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY);
+
+    const userId = decodedToken.userId;
+
+    // Find the user in the database using the decoded user ID from the JWT
+    const user = await User.findOne({ _id: userId });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Access the messages property of the user document
+    const messages = user.messages;
+
+    res.status(200).json({ success: true, messages: messages });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Error", error: error });
+  }
+};
+
 module.exports = {
   sendUserMessage,
   deleteMessageById,
   deleteAllUserMessages,
+  getUserMessages,
 };

@@ -6,6 +6,7 @@ const {
   loginUser,
   deleteUserAndProducts,
   validateUser,
+  getUserInfoByID,
 } = require("../controllers/usersControllers");
 
 const { checkIfEmpty } = require("../utils/checkIfEmpty");
@@ -22,4 +23,5 @@ router.post("/register", checkIfEmpty, validateUserData, createUser); // Registe
 router.post("/login", checkIfEmptyLogin, validateUserData, loginUser); // Login route with checkIfEmpty and validateData middle wares, and login controller function
 router.get("/validate", jwtValidate, validateUser); // Validate route with jwtMiddleware middleware and validateUser controller function
 router.delete("/delete-user/:userId", jwtValidate, deleteUserAndProducts);
+router.get("/getUserInfo/:userId", jwtValidate, getUserInfoByID);
 module.exports = router;

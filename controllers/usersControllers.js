@@ -99,6 +99,41 @@ const validateUser = async (req, res) => {
   }
 };
 
+const getUserInfoByID = async (req, res) => {
+  try {
+    const userId = req.params.userId; // Get the user's ID from the request parameters
+
+    // Find the user by ID
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Return the user's information
+    res.status(200).json({
+      success: true,
+      user: {
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        billingAddress: user.billingAddress,
+        birthday: user.birthday,
+        createdAt: user.createdAt,
+        myItems: user.myItems,
+        messages: user.messages,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "Error", error: error });
+  }
+};
+
 // Controller function to delete a user and their products
 const deleteUserAndProducts = async (req, res) => {
   try {
@@ -134,4 +169,5 @@ module.exports = {
   loginUser,
   deleteUserAndProducts,
   validateUser,
+  getUserInfoByID,
 };
