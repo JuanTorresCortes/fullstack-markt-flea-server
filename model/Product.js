@@ -22,6 +22,7 @@ const productSchema = new mongoose.Schema({
       "toys & games",
       "pets & pet supplies",
       "miscellaneous",
+      "vehicles",
     ],
     default: "miscellaneous",
   },
